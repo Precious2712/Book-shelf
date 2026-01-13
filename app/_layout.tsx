@@ -6,15 +6,14 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme(); // 'light' | 'dark'
-
+  const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
 
   return (
     <>
       <StatusBar
         translucent={false}
-        style={isDark ? 'light' : 'dark'} // 👈 icons match theme
+        style={isDark ? 'light' : 'dark'}
         backgroundColor={isDark ? '#000000' : '#ffffff'}
       />
 
@@ -23,7 +22,7 @@ export default function RootLayout() {
           headerStyle: {
             backgroundColor: isDark
               ? DarkTheme.colors.card
-              : DefaultTheme.colors.card, // 👈 system-aware
+              : DefaultTheme.colors.card,
           },
           headerTintColor: isDark
             ? DarkTheme.colors.text

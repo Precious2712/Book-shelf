@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import {
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard
 } from 'react-native';
 import { Link } from 'expo-router';
+
 import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from '@/components/themed-text';
+
+import { auth } from '@/lib/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function HomeScreen() {
   const [fullName, setFullName] = useState('');
@@ -16,112 +22,135 @@ export default function HomeScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
+    if (!fullName || !email || !password) return;
+
     setLoading(true);
 
-    console.log({ fullName, email, password });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email.trim(),
+        password
+      );
 
-    setTimeout(() => {
+      console.log('User created:', userCredential.user);
+
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Signup error:', error.message);
+      } else {
+        console.error('Unknown error:', error);
+      }
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
+
 
   const isDisabled = !fullName || !email || !password || loading;
 
   return (
-    <ThemedView safe={false} style={styles.container}>
-      <Text style={styles.welcome}>Welcome 👋</Text>
-      <Text style={styles.title}>Create your account</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <ThemedView safe={false} style={styles.container}>
+        <View style={styles.header}>
+          <ThemedText type="default" style={styles.welcome}>
+            Welcome 👋
+          </ThemedText>
 
-      {/* Full Name */}
-      <View style={styles.inputWrapper}>
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput
-          value={fullName}
-          onChangeText={setFullName}
-          placeholder="John Doe"
-          style={styles.input}
-        />
-      </View>
+          <ThemedText type="title">
+            Create your account
+          </ThemedText>
+        </View>
 
-      {/* Email */}
-      <View style={styles.inputWrapper}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="example@email.com"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          style={styles.input}
-        />
-      </View>
+        <View style={styles.inputWrapper}>
+          <ThemedText type="default" style={styles.label}>
+            Full Name
+          </ThemedText>
+          <TextInput
+            value={fullName}
+            onChangeText={setFullName}
+            placeholder="John Doe"
+            style={styles.input}
+          />
+        </View>
 
-      {/* Password */}
-      <View style={styles.inputWrapper}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="••••••••"
-          secureTextEntry
-          style={styles.input}
-        />
-        <Text style={styles.helperText}>
-          Password must be at least 8 characters
-        </Text>
-      </View>
+        <View style={styles.inputWrapper}>
+          <ThemedText type="default" style={styles.label}>
+            Email
+          </ThemedText>
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            placeholder="example@email.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            style={styles.input}
+          />
+        </View>
 
-      {/* Button */}
-      <TouchableOpacity
-        activeOpacity={0.85}
-        disabled={isDisabled}
-        onPress={handleSignup}
-        style={[
-          styles.button,
-          isDisabled && styles.buttonDisabled,
-        ]}
-      >
-        {loading ? (
-          <ActivityIndicator color="#ffffff" />
-        ) : (
-          <Text style={styles.buttonText}>Sign Up</Text>
-        )}
-      </TouchableOpacity>
+        <View style={styles.inputWrapper}>
+          <ThemedText type="default" style={styles.label}>
+            Password
+          </ThemedText>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="••••••••"
+            secureTextEntry
+            style={styles.input}
+          />
+          <ThemedText type="default" style={styles.helperText}>
+            Password must be at least 8 characters
+          </ThemedText>
+        </View>
 
-      {/* Divider */}
-      <View style={styles.divider} />
+        <TouchableOpacity
+          activeOpacity={0.85}
+          disabled={isDisabled}
+          onPress={handleSignup}
+          style={[
+            styles.button,
+            isDisabled && styles.buttonDisabled,
+          ]}
+        >
+          {loading ? (
+            <ActivityIndicator color="#ffffff" />
+          ) : (
+            <ThemedText type="defaultSemiBold" style={styles.buttonText}>
+              Sign Up
+            </ThemedText>
+          )}
+        </TouchableOpacity>
 
-      {/* Footer */}
-      <Text style={styles.footerText}>
-        Already have an account?{' '}
-        <Link href="/login" style={styles.footerLink}>
-          Log in
-        </Link>
-      </Text>
-    </ThemedView>
+        <View style={styles.divider} />
+
+        <ThemedText type="default" style={styles.footerText}>
+          Already have an account?{' '}
+          <Link href="/login">
+            <ThemedText type="link">Log in</ThemedText>
+          </Link>
+        </ThemedText>
+      </ThemedView>
+    </TouchableWithoutFeedback>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
     paddingHorizontal: 20,
     paddingTop: 28,
+  },
+
+  header: {
+    marginBottom: 24,
   },
 
   welcome: {
     fontSize: 14,
     color: '#6b7280',
     marginBottom: 4,
-  },
-
-  title: {
-    fontSize: 26,
-    fontWeight: '700',
-    marginBottom: 24,
   },
 
   inputWrapper: {
@@ -131,7 +160,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     marginBottom: 6,
-    color: '#374151',
   },
 
   input: {
@@ -146,8 +174,8 @@ const styles = StyleSheet.create({
 
   helperText: {
     fontSize: 12,
-    color: '#6b7280',
     marginTop: 6,
+    color: '#6b7280',
   },
 
   button: {
@@ -172,7 +200,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ffffff',
     fontSize: 16,
-    fontWeight: '600',
   },
 
   divider: {
@@ -183,12 +210,7 @@ const styles = StyleSheet.create({
 
   footerText: {
     fontSize: 14,
-    color: '#6b7280',
     textAlign: 'center',
-  },
-
-  footerLink: {
-    color: '#1e40af',
-    fontWeight: '600',
+    color: '#6b7280',
   },
 });

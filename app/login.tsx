@@ -1,40 +1,78 @@
 import { useState } from 'react';
 import {
     StyleSheet,
-    Text,
     TextInput,
     TouchableOpacity,
     View,
     ActivityIndicator,
 } from 'react-native';
 import { Link } from 'expo-router';
+import { useRouter } from "expo-router";
+
 import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from '@/components/themed-text';
+import { auth } from '@/lib/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = () => {
+    const router = useRouter();
+
+    const handleLogin = async () => {
+        if (!email || !password) return;
+
         setLoading(true);
 
-        console.log({ email, password });
+        try {
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email.trim(),
+                password
+            );
 
-        setTimeout(() => {
+            console.log('User signed in:', userCredential.user);
+
+            await userCredential.user.reload();
+
+            router.replace('/home');
+
+            console.log('Current user:', auth.currentUser);
+
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error('Login error:', error.message);
+            } else {
+                console.error('Unknown error:', error);
+            }
+            router.replace('./');
+        } finally {
             setLoading(false);
-        }, 1500);
+        }
     };
+
 
     const isDisabled = !email || !password || loading;
 
     return (
         <ThemedView safe={false} style={styles.container}>
-            <Text style={styles.welcome}>Welcome back 👋</Text>
-            <Text style={styles.title}>Log in to your account</Text>
 
-            {/* Email */}
+            <View style={styles.header}>
+                <ThemedText type="default" style={styles.welcome}>
+                    Welcome back 👋
+                </ThemedText>
+
+                <ThemedText type="title">
+                    Log in to your account
+                </ThemedText>
+            </View>
+
             <View style={styles.inputWrapper}>
-                <Text style={styles.label}>Email</Text>
+                <ThemedText type="default" style={styles.label}>
+                    Email
+                </ThemedText>
                 <TextInput
                     value={email}
                     onChangeText={setEmail}
@@ -45,9 +83,10 @@ export default function LoginScreen() {
                 />
             </View>
 
-            {/* Password */}
             <View style={styles.inputWrapper}>
-                <Text style={styles.label}>Password</Text>
+                <ThemedText type="default" style={styles.label}>
+                    Password
+                </ThemedText>
                 <TextInput
                     value={password}
                     onChangeText={setPassword}
@@ -57,7 +96,7 @@ export default function LoginScreen() {
                 />
             </View>
 
-            {/* Button */}
+
             <TouchableOpacity
                 activeOpacity={0.85}
                 disabled={isDisabled}
@@ -70,44 +109,39 @@ export default function LoginScreen() {
                 {loading ? (
                     <ActivityIndicator color="#ffffff" />
                 ) : (
-                    <Text style={styles.buttonText}>Log In</Text>
+                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>
+                        Log In
+                    </ThemedText>
                 )}
             </TouchableOpacity>
 
-            {/* Divider */}
             <View style={styles.divider} />
 
-            {/* Footer */}
-            <Text style={styles.footerText}>
+            <ThemedText type="default" style={styles.footerText}>
                 Don’t have an account?{' '}
-                <Link href="/" style={styles.footerLink}>
-                    Sign up
+                <Link href="/">
+                    <ThemedText type="link">Sign up</ThemedText>
                 </Link>
-            </Text>
+            </ThemedText>
         </ThemedView>
     );
 }
 
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
         paddingHorizontal: 20,
         paddingTop: 28,
+    },
+
+    header: {
+        marginBottom: 24,
     },
 
     welcome: {
         fontSize: 14,
         color: '#6b7280',
         marginBottom: 4,
-    },
-
-    title: {
-        fontSize: 26,
-        fontWeight: '700',
-        marginBottom: 24,
     },
 
     inputWrapper: {
@@ -117,7 +151,6 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 13,
         marginBottom: 6,
-        color: '#374151',
     },
 
     input: {
@@ -152,7 +185,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#ffffff',
         fontSize: 16,
-        fontWeight: '600',
     },
 
     divider: {
@@ -163,12 +195,7 @@ const styles = StyleSheet.create({
 
     footerText: {
         fontSize: 14,
-        color: '#6b7280',
         textAlign: 'center',
-    },
-
-    footerLink: {
-        color: '#1e40af',
-        fontWeight: '600',
+        color: '#6b7280',
     },
 });
