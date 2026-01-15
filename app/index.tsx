@@ -16,6 +16,8 @@ import { ThemedText } from '@/components/themed-text';
 import { auth } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
+import Toast from 'react-native-toast-message';
+
 export default function HomeScreen() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,13 +30,19 @@ export default function HomeScreen() {
     setLoading(true);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         email.trim(),
         password
       );
 
-      console.log('User created:', userCredential.user);
+      // console.log('User created:', userCredential.user);
+
+      Toast.show({
+        type: 'success',
+        text1: 'Correct!',
+        text2: 'You selected the right answer 🎉',
+      });
 
     } catch (error) {
       if (error instanceof Error) {
@@ -42,6 +50,13 @@ export default function HomeScreen() {
       } else {
         console.error('Unknown error:', error);
       }
+
+      Toast.show({
+        type: 'Error',
+        text1: `${error}`,
+        text2: 'An error has occur 🎉',
+      });
+
     } finally {
       setLoading(false);
     }

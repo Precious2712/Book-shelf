@@ -6,10 +6,10 @@ import {
     StyleSheet,
     Pressable,
     ActivityIndicator,
-    SafeAreaView,
 } from "react-native"
 import { db } from "@/lib/firebase"
 import { ThemedView } from "@/components/themed-view"
+import { useProduct } from "@/context/useContext"
 
 type Question = {
     id: number
@@ -26,6 +26,8 @@ type Exam = {
 }
 
 export default function ExamPage() {
+    const { setRightAnswers, setWrongAnswers } = useProduct();
+
     const [exam, setExam] = useState<Exam | null>(null)
     const [loading, setLoading] = useState(true)
 
@@ -38,7 +40,19 @@ export default function ExamPage() {
     const [finished, setFinished] = useState(false)
     const [score, setScore] = useState(0)
 
-   
+    const restartExam = () => {
+        if (!exam) return
+
+        setFinished(false)
+        setScore(0)
+        setCurrentIndex(0)
+        setAnswers({})
+        setExamTime(exam.totalTime)
+        setQuestionTime(exam.perQuestionTime)
+    }
+
+
+
     useEffect(() => {
         const fetchExam = async () => {
             const ref = doc(db, "Book", "frontend_exam_v1")
@@ -48,7 +62,7 @@ export default function ExamPage() {
                 const data = snap.data() as Exam
                 setExam(data)
                 setExamTime(data.totalTime)
-                setQuestionTime(data.perQuestionTime) 
+                setQuestionTime(data.perQuestionTime)
             }
             setLoading(false)
         }
@@ -56,7 +70,7 @@ export default function ExamPage() {
         fetchExam()
     }, [])
 
-    
+
     useEffect(() => {
         if (!exam || finished) return
         if (examTime <= 0) {
@@ -71,7 +85,7 @@ export default function ExamPage() {
         return () => clearInterval(timer)
     }, [examTime, exam, finished])
 
-    
+
     useEffect(() => {
         if (!exam || finished) return
         if (questionTime <= 0) {
@@ -86,7 +100,7 @@ export default function ExamPage() {
         return () => clearInterval(timer)
     }, [questionTime, exam, finished])
 
-    
+
     const selectAnswer = (option: string) => {
         setAnswers((prev) => ({
             ...prev,
@@ -120,6 +134,17 @@ export default function ExamPage() {
             if (answers[index] === q.correctAnswer) total++
         })
 
+        const right = exam.questions.filter((q, index) => {
+            return answers[index] === q.correctAnswer;
+        });
+
+        const wrong = exam.questions.filter((q, index) => {
+            return answers[index] && answers[index] !== q.correctAnswer;
+        });
+
+        setRightAnswers(right);
+        setWrongAnswers(wrong);
+
         setScore(total)
         setFinished(true)
     }
@@ -130,7 +155,7 @@ export default function ExamPage() {
         return `${m}:${s.toString().padStart(2, "0")}`
     }
 
-    
+
     if (loading) {
         return (
             <View style={styles.center}>
@@ -158,15 +183,21 @@ export default function ExamPage() {
                         Score: {score} / {exam.questions.length}
                     </Text>
                 </View>
+
+                <Pressable onPress={restartExam} style={styles.restartBtn}>
+                    <Text style={styles.restartText}>Restart Exam</Text>
+                </Pressable>
+
             </ThemedView>
         )
     }
 
     const question = exam.questions[currentIndex]
 
+
     return (
         <ThemedView style={styles.container}>
-           
+
             <View style={styles.header}>
                 <Text style={styles.title}>{exam.title}</Text>
                 <View style={styles.timerBox}>
@@ -175,7 +206,7 @@ export default function ExamPage() {
                 </View>
             </View>
 
-            
+
             <View style={styles.meta}>
                 <Text style={styles.metaText}>
                     Question {currentIndex + 1} / {exam.questions.length}
@@ -183,10 +214,10 @@ export default function ExamPage() {
                 <Text style={styles.questionTimer}>{questionTime}s</Text>
             </View>
 
-           
+
             <Text style={styles.questionText}>{question.question}</Text>
 
-            
+
             {Object.entries(question.options).map(([key, value]) => {
                 const selected = answers[currentIndex] === key
                 return (
@@ -210,7 +241,7 @@ export default function ExamPage() {
                 )
             })}
 
-           
+
             <View style={styles.nav}>
                 <Pressable
                     onPress={prevQuestion}
@@ -358,4 +389,17 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: "700",
     },
+    restartBtn: {
+        marginTop: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        backgroundColor: "#16A34A",
+        borderRadius: 10,
+    },
+    restartText: {
+        color: "#FFF",
+        fontSize: 16,
+        fontWeight: "700",
+    },
+
 })

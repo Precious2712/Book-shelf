@@ -14,6 +14,8 @@ import { ThemedText } from '@/components/themed-text';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
+import Toast from 'react-native-toast-message';
+
 export default function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -39,7 +41,13 @@ export default function LoginScreen() {
 
             router.replace('/home');
 
-            console.log('Current user:', auth.currentUser);
+            // console.log('Current user:', auth.currentUser);
+
+            Toast.show({
+                type: 'success',
+                text1: 'Correct!',
+                text2: 'You selected the right answer 🎉',
+            });
 
         } catch (error) {
             if (error instanceof Error) {
@@ -47,6 +55,13 @@ export default function LoginScreen() {
             } else {
                 console.error('Unknown error:', error);
             }
+
+            Toast.show({
+                type: 'Error',
+                text1: 'Invalid Crendentials!',
+                text2: 'You enter an invalid crendentials 🎉',
+            });
+
             router.replace('./');
         } finally {
             setLoading(false);

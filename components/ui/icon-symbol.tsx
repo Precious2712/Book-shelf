@@ -24,6 +24,9 @@ const MAPPING = {
   'doc.text.fill': 'description',
 
   'cart.fill': 'shopping-cart',
+
+  'checkmark.circle.fill': 'check-circle',
+  'xmark.circle.fill': 'cancel',
 } as IconMapping;
 
 /**

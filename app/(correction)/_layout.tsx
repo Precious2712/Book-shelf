@@ -32,41 +32,21 @@ export default function DashboardLayout() {
             }}
         >
             <Tabs.Screen
-                name="home"
+                name="right"
                 options={{
-                    title: 'Home',
+                    title: 'Right-Ans',
                     tabBarIcon: ({ color }) => (
-                        <IconSymbol name="house.fill" size={22} color={color} />
+                        <IconSymbol name="checkmark.circle.fill" size={22} color={color} />
                     ),
                 }}
             />
 
             <Tabs.Screen
-                name="about"
+                name="wrong"
                 options={{
-                    title: 'About',
+                    title: 'Wrong-Ans',
                     tabBarIcon: ({ color }) => (
-                        <IconSymbol name="info.circle.fill" size={22} color={color} />
-                    ),
-                }}
-            />
-
-            <Tabs.Screen
-                name="exam"
-                options={{
-                    title: 'Exam',
-                    tabBarIcon: ({ color }) => (
-                        <IconSymbol name="doc.text.fill" size={22} color={color} />
-                    ),
-                }}
-            />
-
-            <Tabs.Screen
-                name="products"
-                options={{
-                    title: 'Products',
-                    tabBarIcon: ({ color }) => (
-                        <IconSymbol name="cart.fill" size={22} color={color} />
+                        <IconSymbol name="xmark.circle.fill" size={22} color={color} />
                     ),
                 }}
             />
