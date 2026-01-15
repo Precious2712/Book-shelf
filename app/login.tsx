@@ -33,7 +33,7 @@ export default function LoginScreen() {
                 password
             );
 
-            console.log('User signed in:', userCredential.user);
+            // console.log('User signed in:', userCredential.user);
 
             await userCredential.user.reload();
 

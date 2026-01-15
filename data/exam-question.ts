@@ -1,0 +1,167 @@
+export const examQuestions = [
+    {
+        id: 1,
+        question: "What does HTML stand for?",
+        options: {
+            A: "Hyper Text Markup Language",
+            B: "High Text Machine Language",
+            C: "Hyperlinks and Text Markup Language",
+            D: "Home Tool Markup Language",
+        },
+        correctAnswer: "A",
+    },
+    {
+        id: 2,
+        question: "Which language is mainly used for styling web pages?",
+        options: {
+            A: "HTML",
+            B: "Java",
+            C: "CSS",
+            D: "Python",
+        },
+        correctAnswer: "C",
+    },
+    {
+        id: 3,
+        question: "Which of the following is a JavaScript framework?",
+        options: {
+            A: "Laravel",
+            B: "React",
+            C: "Django",
+            D: "Flask",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 4,
+        question: "What keyword is used to declare a constant in JavaScript?",
+        options: {
+            A: "var",
+            B: "let",
+            C: "const",
+            D: "static",
+        },
+        correctAnswer: "C",
+    },
+    {
+        id: 5,
+        question: "Which company developed React?",
+        options: {
+            A: "Google",
+            B: "Microsoft",
+            C: "Facebook",
+            D: "Amazon",
+        },
+        correctAnswer: "C",
+    },
+    {
+        id: 6,
+        question: "What does API stand for?",
+        options: {
+            A: "Application Programming Interface",
+            B: "Applied Program Internet",
+            C: "Advanced Programming Interface",
+            D: "Application Program Integration",
+        },
+        correctAnswer: "A",
+    },
+    {
+        id: 7,
+        question: "Which hook is used for state management in React?",
+        options: {
+            A: "useEffect",
+            B: "useState",
+            C: "useContext",
+            D: "useReducer",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 8,
+        question: "Which HTTP method is used to fetch data?",
+        options: {
+            A: "POST",
+            B: "PUT",
+            C: "GET",
+            D: "DELETE",
+        },
+        correctAnswer: "C",
+    },
+    {
+        id: 9,
+        question: "What does CSS stand for?",
+        options: {
+            A: "Creative Style System",
+            B: "Cascading Style Sheets",
+            C: "Computer Style Sheets",
+            D: "Colorful Style Sheets",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 10,
+        question: "Which of these is NOT a programming language?",
+        options: {
+            A: "Python",
+            B: "JavaScript",
+            C: "HTML",
+            D: "Java",
+        },
+        correctAnswer: "C",
+    },
+    {
+        id: 11,
+        question: "Which tool is commonly used for version control?",
+        options: {
+            A: "Git",
+            B: "Docker",
+            C: "Firebase",
+            D: "Figma",
+        },
+        correctAnswer: "A",
+    },
+    {
+        id: 12,
+        question: "Which React Native component is used to display text?",
+        options: {
+            A: "View",
+            B: "Text",
+            C: "Div",
+            D: "Span",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 13,
+        question: "Which database is Firebase based on?",
+        options: {
+            A: "SQL",
+            B: "NoSQL",
+            C: "PostgreSQL",
+            D: "MySQL",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 14,
+        question: "What does UI stand for?",
+        options: {
+            A: "User Interaction",
+            B: "User Interface",
+            C: "Universal Interface",
+            D: "User Integration",
+        },
+        correctAnswer: "B",
+    },
+    {
+        id: 15,
+        question: "Which platform is used to build cross-platform mobile apps?",
+        options: {
+            A: "React Native",
+            B: "Laravel",
+            C: "Django",
+            D: "Spring Boot",
+        },
+        correctAnswer: "A",
+    },
+];
