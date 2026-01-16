@@ -43,6 +43,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a30f99fc-47c3-4682-aa23-16dea854d056"
+      }
+    },
+    "owner": "moon_light12",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a30f99fc-47c3-4682-aa23-16dea854d056"
     }
   }
 }
