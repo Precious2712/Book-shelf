@@ -24,8 +24,9 @@ export default function DashboardLayout() {
                 tabBarInactiveTintColor: theme.colors.text + '99',
 
                 headerTitleStyle: {
-                    color: '#fff', 
+                    color: '#fff',
                     fontWeight: '600',
+                    fontSize: 18,
                 },
 
                 headerTintColor: '#fff',

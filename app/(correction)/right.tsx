@@ -1,10 +1,12 @@
 import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useProduct } from '@/context/useContext';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { db } from "@/lib/firebase"
+import { doc, setDoc } from 'firebase/firestore';
 
 export default function Right() {
-    const { rightAnswers } = useProduct();
+    const { rightAnswers, userId } = useProduct();
 
     if (rightAnswers.length === 0) {
         return (
@@ -13,6 +15,26 @@ export default function Right() {
             </View>
         );
     }
+
+    const total = async () => {
+        if (!userId) return;
+
+        await setDoc(
+            doc(db, 'total-right-answer', userId),
+            {
+                userId,
+                rightAnswers,
+                createdAt: new Date(),
+            }
+        );
+    };
+
+    useEffect(() => {
+        if (!userId || rightAnswers.length === 0) return;
+        total();
+    }, [userId, rightAnswers]);
+
+
 
     return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>

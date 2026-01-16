@@ -18,6 +18,7 @@ export default function AboutScreen() {
         styles.container,
         { backgroundColor: theme.colors.background },
       ]}
+      // safe={false}
     >
       
       <Text
