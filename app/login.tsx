@@ -46,7 +46,7 @@ export default function LoginScreen() {
             Toast.show({
                 type: 'success',
                 text1: 'Correct!',
-                text2: 'You selected the right answer 🎉',
+                text2: 'You have login 🎉',
             });
 
         } catch (error) {

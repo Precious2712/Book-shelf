@@ -21,7 +21,6 @@ export default function RootLayout() {
       />
 
       <ProductProvider>
-        <Toast />
         <Stack
           screenOptions={{
             headerStyle: {
@@ -43,6 +42,9 @@ export default function RootLayout() {
           <Stack.Screen name="(correction)" options={{ headerShown: false }} />
         </Stack>
       </ProductProvider>
+
+      
+      <Toast />
     </>
   );
 }

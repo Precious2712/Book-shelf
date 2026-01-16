@@ -37,7 +37,7 @@ export default function Wrong() {
     return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.container}>
-                {/* Table Header */}
+                
                 <View style={[styles.row, styles.header]}>
                     <Text style={[styles.cell, styles.no]}>No</Text>
                     <Text style={[styles.cell, styles.question]}>Question</Text>
@@ -45,7 +45,7 @@ export default function Wrong() {
                     <Text style={[styles.cell, styles.icon]}></Text>
                 </View>
 
-                {/* Table Body */}
+                
                 <FlatList
                     data={wrongAnswers}
                     keyExtractor={(item) => item.id.toString()}
@@ -84,7 +84,7 @@ export default function Wrong() {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        minWidth: 700, // 👈 forces horizontal scrolling
+        minWidth: 700, 
     },
     center: {
         flex: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     question: {
-        width: 400, // 👈 long text space
+        width: 400, 
     },
     option: {
         width: 180,
