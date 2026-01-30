@@ -1,16 +1,17 @@
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
+    ActivityIndicator,
+    Keyboard,
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    View,
-    ActivityIndicator,
+    TouchableWithoutFeedback,
+    View
 } from 'react-native';
-import { Link } from 'expo-router';
-import { useRouter } from "expo-router";
 
-import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -72,73 +73,75 @@ export default function LoginScreen() {
     const isDisabled = !email || !password || loading;
 
     return (
-        <ThemedView safe={false} style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <ThemedView safe={false} style={styles.container}>
 
-            <View style={styles.header}>
-                <ThemedText type="default" style={styles.welcome}>
-                    Welcome back 👋
-                </ThemedText>
-
-                <ThemedText type="title">
-                    Log in to your account
-                </ThemedText>
-            </View>
-
-            <View style={styles.inputWrapper}>
-                <ThemedText type="default" style={styles.label}>
-                    Email
-                </ThemedText>
-                <TextInput
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder="example@email.com"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    style={styles.input}
-                />
-            </View>
-
-            <View style={styles.inputWrapper}>
-                <ThemedText type="default" style={styles.label}>
-                    Password
-                </ThemedText>
-                <TextInput
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder="••••••••"
-                    secureTextEntry
-                    style={styles.input}
-                />
-            </View>
-
-
-            <TouchableOpacity
-                activeOpacity={0.85}
-                disabled={isDisabled}
-                onPress={handleLogin}
-                style={[
-                    styles.button,
-                    isDisabled && styles.buttonDisabled,
-                ]}
-            >
-                {loading ? (
-                    <ActivityIndicator color="#ffffff" />
-                ) : (
-                    <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-                        Log In
+                <View style={styles.header}>
+                    <ThemedText type="default" style={styles.welcome}>
+                        Welcome back 👋
                     </ThemedText>
-                )}
-            </TouchableOpacity>
 
-            <View style={styles.divider} />
+                    <ThemedText type="title">
+                        Log in to your account
+                    </ThemedText>
+                </View>
 
-            <ThemedText type="default" style={styles.footerText}>
-                Don’t have an account?{' '}
-                <Link href="/">
-                    <ThemedText type="link">Sign up</ThemedText>
-                </Link>
-            </ThemedText>
-        </ThemedView>
+                <View style={styles.inputWrapper}>
+                    <ThemedText type="default" style={styles.label}>
+                        Email
+                    </ThemedText>
+                    <TextInput
+                        value={email}
+                        onChangeText={setEmail}
+                        placeholder="example@email.com"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        style={styles.input}
+                    />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                    <ThemedText type="default" style={styles.label}>
+                        Password
+                    </ThemedText>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        placeholder="••••••••"
+                        secureTextEntry
+                        style={styles.input}
+                    />
+                </View>
+
+
+                <TouchableOpacity
+                    activeOpacity={0.85}
+                    disabled={isDisabled}
+                    onPress={handleLogin}
+                    style={[
+                        styles.button,
+                        isDisabled && styles.buttonDisabled,
+                    ]}
+                >
+                    {loading ? (
+                        <ActivityIndicator color="#ffffff" />
+                    ) : (
+                        <ThemedText type="defaultSemiBold" style={styles.buttonText}>
+                            Log In
+                        </ThemedText>
+                    )}
+                </TouchableOpacity>
+
+                <View style={styles.divider} />
+
+                <ThemedText type="default" style={styles.footerText}>
+                    Do not have an account?{' '}
+                    <Link href="/">
+                        <ThemedText type="link">Sign up</ThemedText>
+                    </Link>
+                </ThemedText>
+            </ThemedView>
+        </TouchableWithoutFeedback>
     );
 }
 

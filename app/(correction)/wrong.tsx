@@ -35,62 +35,67 @@ export default function Wrong() {
     }, [userId, wrongAnswers]);
 
     return (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.container}>
-                
-                <View style={[styles.row, styles.header]}>
-                    <Text style={[styles.cell, styles.no]}>No</Text>
-                    <Text style={[styles.cell, styles.question]}>Question</Text>
-                    <Text style={[styles.cell, styles.option]}>Correct</Text>
-                    <Text style={[styles.cell, styles.icon]}></Text>
-                </View>
+        <View style={styles.wrapper}>
+            <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+            >
+                <View style={styles.container}>
+                    
+                    <View style={[styles.row, styles.header]}>
+                        <Text style={[styles.cell, styles.no]}>No</Text>
+                        <Text style={[styles.cell, styles.question]}>Question</Text>
+                        <Text style={[styles.cell, styles.option]}>Correct</Text>
+                        <Text style={[styles.cell, styles.icon]}></Text>
+                    </View>
 
-                
-                <FlatList
-                    data={wrongAnswers}
-                    keyExtractor={(item) => item.id.toString()}
-                    nestedScrollEnabled
-                    renderItem={({ item, index }) => (
-                        <View style={styles.row}>
-                            <Text style={[styles.cell, styles.no]}>
-                                {index + 1}
-                            </Text>
+                    
+                    <FlatList
+                        data={wrongAnswers}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item, index }) => (
+                            <View style={styles.row}>
+                                <Text style={[styles.cell, styles.no]}>
+                                    {index + 1}
+                                </Text>
 
-                            <Text style={[styles.cell, styles.question]}>
-                                {item.question}
-                            </Text>
+                                <Text style={[styles.cell, styles.question]}>
+                                    {item.question}
+                                </Text>
 
-                            <Text style={[styles.cell, styles.option]}>
-                                {item.options[item.correctAnswer]}
-                            </Text>
+                                <Text style={[styles.cell, styles.option]}>
+                                    {item.options[item.correctAnswer]}
+                                </Text>
 
-                            <View style={[styles.cell, styles.icon]}>
-                                <IconSymbol
-                                    name="xmark.circle.fill"
-                                    size={20}
-                                    color="red"
-                                />
+                                <View style={[styles.cell, styles.icon]}>
+                                    <IconSymbol
+                                        name="xmark.circle.fill"
+                                        size={20}
+                                        color="red"
+                                    />
+                                </View>
                             </View>
-                        </View>
-                    )}
-                />
-            </View>
-        </ScrollView>
+                        )}
+                    />
+                </View>
+            </ScrollView>
+        </View>
     );
 }
 
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        width: '85%',          
+        alignSelf: 'center',   
+    },
+
     container: {
         padding: 16,
-        minWidth: 700, 
+        minWidth: 700,         
     },
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
     row: {
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -98,26 +103,39 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         alignItems: 'center',
     },
+
     header: {
         backgroundColor: '#f5f5f5',
     },
+
     cell: {
         paddingHorizontal: 8,
     },
+
     no: {
         width: 60,
         fontWeight: 'bold',
     },
+
     question: {
-        width: 400, 
+        width: 400,
     },
+
     option: {
         width: 180,
         color: 'red',
         fontWeight: '500',
     },
+
     icon: {
         width: 60,
         alignItems: 'center',
     },
+
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
+

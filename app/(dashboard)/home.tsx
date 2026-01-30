@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import {
-    StyleSheet,
-    View,
-    ActivityIndicator,
-    FlatList,
-    Text,
-    Image,
-    TouchableOpacity,
-    Modal,
-    Pressable,
-} from "react-native";
 import { useRouter } from "expo-router";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import {
+    ActivityIndicator,
+    FlatList,
+    Image,
+    Modal,
+    Pressable,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
-import { auth, db } from "@/lib/firebase";
-import { bookData } from "@/data/book";
 import { useProduct } from "@/context/useContext";
+import { bookData } from "@/data/book";
+import { auth, db } from "@/lib/firebase";
 
 interface Book {
     id: string;
@@ -127,7 +127,7 @@ export function HomePage() {
                 )}
             />
 
-            {/* ===== Modal ===== */}
+            
             <Modal
                 visible={modalVisible}
                 animationType="slide"
@@ -136,7 +136,7 @@ export function HomePage() {
             >
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalCard}>
-                        {/* Close button */}
+                        
                         <Pressable style={styles.closeButton} onPress={closeModal}>
                             <Text style={styles.closeText}>✕</Text>
                         </Pressable>

@@ -1,11 +1,14 @@
-import { DarkTheme, DefaultTheme } from '@react-navigation/native'
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native"
-import { useRouter } from "expo-router"
-import { useColorScheme } from '@/hooks/use-color-scheme'
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useRouter } from "expo-router";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+
+import { DarkThemeApp, LightTheme } from '@/constants/background';
 
 export default function AppHeader() {
-    const colorScheme = useColorScheme()
-    const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
+    const colorScheme = useColorScheme();
+    const isDark = colorScheme === 'dark';
+    const theme = isDark ? DarkThemeApp : LightTheme;
+    
     const router = useRouter()
 
     return (
@@ -16,7 +19,7 @@ export default function AppHeader() {
             ]}
         >
             <View style={styles.iconRow}>
-                
+
                 <TouchableOpacity onPress={() => router.replace("/home")}>
                     <Image
                         source={{ uri: "https://img.icons8.com/ios-filled/50/home.png" }}
@@ -24,7 +27,7 @@ export default function AppHeader() {
                     />
                 </TouchableOpacity>
 
-                
+
                 <TouchableOpacity onPress={() => router.replace("/right")}>
                     <Image
                         source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}
@@ -32,7 +35,7 @@ export default function AppHeader() {
                     />
                 </TouchableOpacity>
 
-                
+
                 <TouchableOpacity onPress={() => router.replace("/wrong")}>
                     <Image
                         source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}

@@ -1,13 +1,14 @@
-import { Tabs } from 'expo-router'
-import { DarkTheme, DefaultTheme } from '@react-navigation/native'
-import { useColorScheme } from '@/hooks/use-color-scheme'
-import { IconSymbol } from '@/components/ui/icon-symbol'
-import AppHeader from '@/components/header-comp/AppHeader'
+import AppHeader from '@/components/header-comp/AppHeader';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { DarkThemeApp, LightTheme } from '@/constants/background';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from 'expo-router';
 
 
 export default function DashboardLayout() {
-    const colorScheme = useColorScheme()
-    const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
+    const colorScheme = useColorScheme();
+    const isDark = colorScheme === 'dark';
+    const theme = isDark ? DarkThemeApp : LightTheme;
 
     return (
         <Tabs

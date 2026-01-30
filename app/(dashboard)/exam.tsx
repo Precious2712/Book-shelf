@@ -196,7 +196,7 @@ export default function ExamPage() {
 
 
     return (
-        <ThemedView style={styles.container}>
+        <View style={styles.container}>
 
             <View style={styles.header}>
                 <Text style={styles.title}>{exam.title}</Text>
@@ -264,7 +264,7 @@ export default function ExamPage() {
                     </Text>
                 </Pressable>
             </View>
-        </ThemedView>
+        </View>
     )
 }
 
@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        marginTop: -10
     },
     loadingText: {
         marginTop: 10,

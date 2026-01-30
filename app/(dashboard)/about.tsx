@@ -1,30 +1,27 @@
-import { Text, StyleSheet, View, Image } from 'react-native';
+import { DarkThemeApp, LightTheme } from '@/constants/background';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { ThemedView } from '@/components/themed-view';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { useProduct } from '@/context/useContext';
 
 export default function AboutScreen() {
   const colorScheme = useColorScheme();
-  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
   const isDark = colorScheme === 'dark';
-
+  const theme = isDark ? DarkThemeApp : LightTheme;
   const { selectedProduct } = useProduct();
 
   return (
-    <ThemedView
+    <View
       style={[
         styles.container,
-        { backgroundColor: theme.colors.background },
+        { backgroundColor: 'white' },
       ]}
-      // safe={false}
     >
-      
+
       <Text
         style={[
           styles.header,
-          { color: theme.colors.text },
+          { color: 'blue' },
         ]}
       >
         Selected Product
@@ -45,7 +42,7 @@ export default function AboutScreen() {
         <View
           style={[
             styles.card,
-            { backgroundColor: isDark ? '#111' : '#f9f9f9' },
+            { backgroundColor:  '#f9f9f9' },
           ]}
         >
           <Image
@@ -56,7 +53,7 @@ export default function AboutScreen() {
           <Text
             style={[
               styles.name,
-              { color: theme.colors.text },
+              { color: '#7A7A7A' },
             ]}
           >
             {selectedProduct.name}
@@ -65,23 +62,25 @@ export default function AboutScreen() {
           <Text
             style={[
               styles.price,
-              { color: isDark ? '#ccc' : '#333' },
+              { color: '#333' },
             ]}
           >
             ₦{selectedProduct.price.toLocaleString()}
           </Text>
         </View>
       )}
-    </ThemedView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
+    marginTop: -10
   },
 
   header: {
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
 
   card: {
     width: '100%',
-    maxWidth: 320,
+    // maxWidth: 320,
     borderRadius: 16,
     padding: 16,
     alignItems: 'center',

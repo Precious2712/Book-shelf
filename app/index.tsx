@@ -1,17 +1,17 @@
+import { Link } from 'expo-router';
 import { useState } from 'react';
 import {
+  ActivityIndicator,
+  Keyboard,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
-  ActivityIndicator,
   TouchableWithoutFeedback,
-  Keyboard
+  View
 } from 'react-native';
-import { Link } from 'expo-router';
 
-import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
 
 import { auth } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <ThemedView safe={false} style={styles.container}>
+      <ThemedView style={styles.container}>
         <View style={styles.header}>
           <ThemedText type="default" style={styles.welcome}>
             Welcome 👋

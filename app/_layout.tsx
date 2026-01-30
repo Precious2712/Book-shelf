@@ -1,36 +1,37 @@
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
 import { ProductProvider } from '@/context/useContext';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import Toast from 'react-native-toast-message';
+
+import { DarkThemeApp, LightTheme } from '@/constants/background';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
+  const theme = isDark ? DarkThemeApp : LightTheme;
 
   return (
     <>
+
       <StatusBar
         translucent={false}
         style={isDark ? 'light' : 'dark'}
-        backgroundColor={isDark ? '#000000' : '#ffffff'}
+        backgroundColor={theme.colors.background}
       />
 
+
       <ProductProvider>
+
         <Stack
           screenOptions={{
             headerStyle: {
-              backgroundColor: isDark
-                ? DarkTheme.colors.card
-                : DefaultTheme.colors.card,
+              backgroundColor: theme.colors.background,
             },
-            headerTintColor: isDark
-              ? DarkTheme.colors.text
-              : DefaultTheme.colors.text,
+            headerTintColor: theme.colors.primary,
             headerTitleStyle: {
               fontWeight: '600',
             },
@@ -43,7 +44,6 @@ export default function RootLayout() {
         </Stack>
       </ProductProvider>
 
-      
       <Toast />
     </>
   );
