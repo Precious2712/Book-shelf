@@ -52,7 +52,7 @@ export default function HomeScreen() {
       }
 
       Toast.show({
-        type: 'Error',
+        type: 'error',
         text1: `${error}`,
         text2: 'An error has occur 🎉',
       });
