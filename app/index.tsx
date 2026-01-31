@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <ThemedView  style={styles.container}>
+      <ThemedView safe={true} style={styles.container}>
         <View style={styles.header}>
           <ThemedText type="default" style={styles.welcome}>
             Welcome 👋
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 28,
+    paddingTop: 68,
   },
 
   header: {

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingTop: 28,
+        paddingTop: 68,
     },
 
     header: {

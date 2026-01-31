@@ -18,7 +18,7 @@ export default function RootLayout() {
     <>
 
       <StatusBar
-        translucent={false}
+        // translucent={false}
         style={isDark ? 'light' : 'dark'}
         backgroundColor={theme.colors.background}
       />
@@ -29,7 +29,7 @@ export default function RootLayout() {
         <Stack
           screenOptions={{
             headerStyle: {
-              backgroundColor: theme.colors.background,
+              backgroundColor: 'blue',
             },
             headerTintColor: theme.colors.primary,
             headerTitleStyle: {
@@ -37,8 +37,14 @@ export default function RootLayout() {
             },
           }}
         >
-          <Stack.Screen name="index" options={{ title: 'Create Account' }} />
-          <Stack.Screen name="login" options={{ title: 'Login' }} />
+          <Stack.Screen
+            name="index"
+            options={{
+             headerShown: false
+              
+            }}
+          />
+          <Stack.Screen name="login" options={{ headerShown: false }} />
           <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
           <Stack.Screen name="(correction)" options={{ headerShown: false }} />
         </Stack>

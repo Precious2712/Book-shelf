@@ -17,6 +17,7 @@ import {
 import { useProduct } from "@/context/useContext";
 import { bookData } from "@/data/book";
 import { auth, db } from "@/lib/firebase";
+import AppHeader from "@/components/header-comp/AppHeader";
 
 interface Book {
     id: string;
@@ -100,6 +101,9 @@ export function HomePage() {
 
     return (
         <View style={styles.container}>
+            
+            {/* <AppHeader/> */}
+
             <FlatList<Book>
                 data={books}
                 keyExtractor={(item) => item.id}

@@ -24,11 +24,11 @@ export default function DashboardLayout() {
                 tabBarActiveTintColor: theme.colors.primary,
                 tabBarInactiveTintColor: theme.colors.text + '99',
 
-                headerTitleStyle: {
-                    color: '#fff',
-                    fontWeight: '600',
-                    fontSize: 18,
-                },
+                // headerTitleStyle: {
+                //     color: '#fff',
+                //     fontWeight: '600',
+                    // fontSize: 18,
+                // },
 
                 headerTintColor: '#fff',
             }}
