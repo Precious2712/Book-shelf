@@ -58,7 +58,7 @@ export default function LoginScreen() {
             }
 
             Toast.show({
-                type: 'Error',
+                type: 'error',
                 text1: 'Invalid Crendentials!',
                 text2: 'You enter an invalid crendentials 🎉',
             });
