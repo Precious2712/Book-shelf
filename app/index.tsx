@@ -67,7 +67,7 @@ export default function HomeScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <ThemedView style={styles.container}>
+      <ThemedView  style={styles.container}>
         <View style={styles.header}>
           <ThemedText type="default" style={styles.welcome}>
             Welcome 👋

@@ -14,7 +14,7 @@ export default function DashboardLayout() {
         <Tabs
             screenOptions={{
                 headerShown: true,
-                headerBackground: () => <AppHeader />,
+                header: () => <AppHeader />,
                 tabBarStyle: {
                     backgroundColor: theme.colors.background,
                     borderTopColor: theme.colors.background,
@@ -40,6 +40,7 @@ export default function DashboardLayout() {
                     tabBarIcon: ({ color }) => (
                         <IconSymbol name="house.fill" size={22} color={color} />
                     ),
+                    // headerShown:true
                 }}
             />
 

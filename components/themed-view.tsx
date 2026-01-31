@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
-  safe?: boolean; // ✅ ADD THIS
+  safe?: boolean; 
 };
 
 export function ThemedView({
