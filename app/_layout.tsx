@@ -27,21 +27,12 @@ export default function RootLayout() {
       <ProductProvider>
 
         <Stack
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: 'blue',
-            },
-            headerTintColor: theme.colors.primary,
-            headerTitleStyle: {
-              fontWeight: '600',
-            },
-          }}
         >
           <Stack.Screen
             name="index"
             options={{
-             headerShown: false
-              
+              headerShown: false
+
             }}
           />
           <Stack.Screen name="login" options={{ headerShown: false }} />

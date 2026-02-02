@@ -18,6 +18,7 @@ import { useProduct } from "@/context/useContext";
 import { bookData } from "@/data/book";
 import { auth, db } from "@/lib/firebase";
 import AppHeader from "@/components/header-comp/AppHeader";
+import { ThemedView } from "@/components/themed-view";
 
 interface Book {
     id: string;
@@ -47,7 +48,7 @@ export function HomePage() {
                 return;
             }
 
-            setUserId(user.uid); 
+            setUserId(user.uid);
         });
 
         return unsubscribe;
@@ -100,9 +101,7 @@ export function HomePage() {
     };
 
     return (
-        <View style={styles.container}>
-            
-            {/* <AppHeader/> */}
+        <ThemedView  style={styles.container}>
 
             <FlatList<Book>
                 data={books}
@@ -131,7 +130,7 @@ export function HomePage() {
                 )}
             />
 
-            
+
             <Modal
                 visible={modalVisible}
                 animationType="slide"
@@ -140,7 +139,7 @@ export function HomePage() {
             >
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalCard}>
-                        
+
                         <Pressable style={styles.closeButton} onPress={closeModal}>
                             <Text style={styles.closeText}>✕</Text>
                         </Pressable>
@@ -168,7 +167,7 @@ export function HomePage() {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </ThemedView>
     );
 }
 

@@ -3,6 +3,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { useProduct } from '@/context/useContext';
+import { ThemedView } from '@/components/themed-view';
 
 export default function AboutScreen() {
   const colorScheme = useColorScheme();
@@ -11,7 +12,7 @@ export default function AboutScreen() {
   const { selectedProduct } = useProduct();
 
   return (
-    <View
+    <ThemedView
       style={[
         styles.container,
         { backgroundColor: 'white' },
@@ -42,7 +43,7 @@ export default function AboutScreen() {
         <View
           style={[
             styles.card,
-            { backgroundColor:  '#f9f9f9' },
+            { backgroundColor: '#f9f9f9' },
           ]}
         >
           <Image
@@ -69,7 +70,7 @@ export default function AboutScreen() {
           </Text>
         </View>
       )}
-    </View>
+    </ThemedView>
   );
 }
 

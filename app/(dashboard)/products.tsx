@@ -13,6 +13,7 @@ import { db } from '@/lib/firebase';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import productsData from '@/data/product';
 import { useProduct } from '@/context/useContext';
+import { ThemedView } from '@/components/themed-view';
 
 type Product = {
     id: string;
@@ -76,7 +77,7 @@ export default function ProductsScreen() {
     };
 
     return (
-        <View
+        <ThemedView
             style={[
                 styles.container,
                 { backgroundColor: isDark ? '#000' : '#fff' },
@@ -125,7 +126,7 @@ export default function ProductsScreen() {
                     </View>
                 )}
             />
-        </View>
+        </ThemedView>
     );
 }
 

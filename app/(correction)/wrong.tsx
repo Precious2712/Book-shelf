@@ -4,6 +4,7 @@ import { useProduct } from '@/context/useContext';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { db } from "@/lib/firebase"
 import { doc, setDoc } from 'firebase/firestore';
+import { ThemedView } from '@/components/themed-view';
 
 export default function Wrong() {
     const { wrongAnswers, userId } = useProduct();
@@ -35,7 +36,7 @@ export default function Wrong() {
     }, [userId, wrongAnswers]);
 
     return (
-        <View style={styles.wrapper}>
+        <ThemedView  style={styles.wrapper}>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -79,7 +80,7 @@ export default function Wrong() {
                     />
                 </View>
             </ScrollView>
-        </View>
+        </ThemedView>
     );
 }
 

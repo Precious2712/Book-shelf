@@ -4,6 +4,7 @@ import { useProduct } from '@/context/useContext';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { db } from "@/lib/firebase"
 import { doc, setDoc } from 'firebase/firestore';
+import { ThemedView } from '@/components/themed-view';
 
 export default function Right() {
     const { rightAnswers, userId } = useProduct();
@@ -37,7 +38,7 @@ export default function Right() {
 
 
     return (
-        <View style={styles.wrapper}>
+        <ThemedView  style={styles.wrapper}>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -81,7 +82,7 @@ export default function Right() {
                     />
                 </View>
             </ScrollView>
-        </View>
+        </ThemedView>
     );
 }
 

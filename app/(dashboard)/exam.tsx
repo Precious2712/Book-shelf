@@ -196,7 +196,7 @@ export default function ExamPage() {
 
 
     return (
-        <View style={styles.container}>
+        <ThemedView  style={styles.container}>
 
             <View style={styles.header}>
                 <Text style={styles.title}>{exam.title}</Text>
@@ -264,7 +264,7 @@ export default function ExamPage() {
                     </Text>
                 </Pressable>
             </View>
-        </View>
+        </ThemedView>
     )
 }
 

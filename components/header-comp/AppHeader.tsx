@@ -5,6 +5,7 @@ import { Image, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 import logo from '../../assets/images/favicon.png'
 import { DarkThemeApp, LightTheme } from '@/constants/background';
+import { ThemedView } from '../themed-view';
 
 export default function AppHeader() {
     const colorScheme = useColorScheme();
@@ -13,40 +14,38 @@ export default function AppHeader() {
     const router = useRouter();
 
     return (
-        <SafeAreaView style={{ backgroundColor: theme.colors.background }}>
-            <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-                <View style={styles.left}>
-                    <Image source={logo} style={styles.logo} />
-                    <Text style={[styles.title, { color: theme.colors.text }]}>Library</Text>
-                </View>
-
-                <View style={styles.iconRow}>
-                    <TouchableOpacity onPress={() => router.replace("/home")}>
-                        <Image
-                            source={{ uri: "https://img.icons8.com/ios-filled/50/home.png" }}
-                            style={[styles.icon, { tintColor: theme.colors.text }]}
-                        />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => router.replace("/right")}>
-                        <Image
-                            source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}
-                            style={[styles.icon, { tintColor: theme.colors.text }]}
-                        />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => router.replace("/wrong")}>
-                        <Image
-                            source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}
-                            style={[
-                                styles.icon,
-                                { tintColor: theme.colors.text, transform: [{ rotate: '180deg' }] },
-                            ]}
-                        />
-                    </TouchableOpacity>
-                </View>
+        <ThemedView safe style={[styles.container, { backgroundColor: 'blue' }]}>
+            <View style={styles.left}>
+                <Image source={logo} style={styles.logo} />
+                <Text style={[styles.title, { color: theme.colors.text }]}>Library</Text>
             </View>
-        </SafeAreaView>
+
+            <View style={styles.iconRow}>
+                <TouchableOpacity onPress={() => router.replace("/home")}>
+                    <Image
+                        source={{ uri: "https://img.icons8.com/ios-filled/50/home.png" }}
+                        style={[styles.icon, { tintColor: theme.colors.text }]}
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => router.replace("/right")}>
+                    <Image
+                        source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}
+                        style={[styles.icon, { tintColor: theme.colors.text }]}
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => router.replace("/wrong")}>
+                    <Image
+                        source={{ uri: "https://img.icons8.com/ios-filled/50/checkmark.png" }}
+                        style={[
+                            styles.icon,
+                            { tintColor: theme.colors.text, transform: [{ rotate: '180deg' }] },
+                        ]}
+                    />
+                </TouchableOpacity>
+            </View>
+        </ThemedView>
     );
 }
 
@@ -56,8 +55,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%",
-        paddingHorizontal: 16,
-        paddingVertical: 10,
+        paddingHorizontal: 10,
+        // paddingVertical: 100,
+        height: 90
     },
     left: {
         flexDirection: "row",
